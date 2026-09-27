@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://richhabits.github.io/flipit-app/sitemap.xml
