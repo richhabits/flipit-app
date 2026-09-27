@@ -1,0 +1,19 @@
+Copyright (c) 2026 Hectic Radio Ltd. All rights reserved.
+
+PROPRIETARY AND CONFIDENTIAL. This repository and everything in it (source code, strategy definitions and specifications,
+test results, ledgers and state files, prompts, designs, text, translations, screenshots, and the FLIP IT name and logo)
+is the property of Hectic Radio Ltd.
+
+No licence or permission is granted, expressly or by implication, to copy, modify, merge, publish, distribute, sublicense,
+sell, reverse-engineer, train a model on, or otherwise use any part of it, except with the prior written permission of
+Hectic Radio Ltd. Access to this repository (or to a build of the app) does not transfer any right.
+
+Strategy specifications, Gate results, the ledger and any real-data captures are trade secrets and confidential information.
+
+The public website repository (richhabits/flipit-app) contains only the published website; its content is also
+copyright Hectic Radio Ltd, all rights reserved, and being publicly readable is not a licence to reuse it.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. FLIP IT is a paper-trading (practice) tool: nothing in it is
+financial advice.
+
+Contact: open an issue at https://github.com/richhabits/flipit-app/issues
