@@ -1,0 +1,48 @@
+name: Windows build & test
+
+# Prove the public FLIP IT static site is present and well-formed on Windows.
+# No trading, no Trading212/broker APIs, no secrets, no deploy.
+# Actions was enabled for this repo so this workflow can run.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - ci/windows
+
+permissions:
+  contents: read
+
+jobs:
+  site:
+    name: Static site validate (Node 22)
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify required pages
+        shell: pwsh
+        run: |
+          $required = @('index.html','privacy.html','support.html','risk.html','404.html','robots.txt','sitemap.xml')
+          foreach ($f in $required) {
+            if (-not (Test-Path $f)) { throw "missing $f" }
+          }
+          foreach ($f in @('index.html','privacy.html','support.html','risk.html')) {
+            $html = Get-Content $f -Raw
+            if ($html -notmatch '(?i)<html') { throw "$f missing <html>" }
+          }
+          # Safety: this marketing site must not embed live broker credentials or order endpoints.
+          $all = Get-ChildItem -File | Where-Object { $_.Extension -in '.html','.js','.mjs','.ts' }
+          foreach ($f in $all) {
+            $t = Get-Content $f.FullName -Raw
+            if ($t -match '(?i)T212_API_KEY|FLIPIT_LIVE_SIGNOFF|live\.trading212\.com') {
+              throw "$($f.Name) looks like it embeds live trading credentials or endpoints"
+            }
+          }
+          Write-Host "flipit-app static site OK (no trading code)"
